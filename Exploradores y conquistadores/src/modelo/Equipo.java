@@ -7,6 +7,13 @@ public class Equipo {
 	int cantidadDeTesoros;
 	int tesorosPorCapturar;
 
+	public Equipo(String e, String o, int cTesoros, int tesorosEnemigos) {
+		this.nombre = e;
+		this.origen = o;
+		this.cantidadDeTesoros = cTesoros;
+		this.tesorosPorCapturar = tesorosEnemigos;
+	}
+	
 	public String emisferioDeOrigen() {
 		return origen;
 	}

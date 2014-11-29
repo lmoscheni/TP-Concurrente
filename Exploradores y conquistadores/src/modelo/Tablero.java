@@ -5,6 +5,21 @@ public class Tablero {
 	int xMax;
 	int yMax;
 
+	public Tablero(int x, int y) {
+		int xAux = x;
+		int yAux = y;
+		
+		while(xAux < 0) {
+			while(yAux < 0) {
+				this.tablero[xAux][yAux] = new Celda();
+			}
+		}
+	}
+	
+	public void agregarJugador(int x, int y, Jugador j) {
+		this.tablero[x][y].jugador = j;
+	}
+	
 	public void mover(int x, int y, Jugador jugador) throws InterruptedException {
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugador(jugador);
