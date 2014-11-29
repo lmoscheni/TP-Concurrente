@@ -15,13 +15,9 @@ public class Celda {
 	Jugador jugador;
 	String equipoDueñoDelTesoro;
 	
-	public Celda() {
+	public Celda(){
 		this.jugador = null;
 		this.equipoDueñoDelTesoro = null;
-	}
-	
-	public String getEquipoDuenoDelTesoro() {
-		return equipoDueñoDelTesoro;
 	}
 	
 	public void ponerJugador(Jugador unJugador) throws InterruptedException{
@@ -63,5 +59,13 @@ public class Celda {
 	
 	public boolean elTesoroEsDeMiEquipo(Jugador jugador){
 		return this.equipoDueñoDelTesoro == jugador.miEquipo();
+	}
+	
+	public void setJugador(Jugador jugador){
+		this.jugador = jugador;
+	}
+	
+	public Jugador getJugador(){
+		return this.jugador;
 	}
 }

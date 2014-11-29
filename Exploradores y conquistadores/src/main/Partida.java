@@ -10,6 +10,8 @@ public class Partida {
 	public static void main(String[] args) {
 		
 		Tablero tablero = new Tablero(11, 11);
+//		Celda c = tablero.tablero[10][10];
+//		System.out.println(c);
 		
 		Celda c = tablero.obtenerCelda(8, 9);
 		
@@ -26,17 +28,17 @@ public class Partida {
 		//Jugadores Equipo Rojo
 		Jugador j4 = new Jugador(7, 4, rojo, tablero);
 		Jugador j5 = new Jugador(10, 6, rojo, tablero);
-		Jugador j6 = new Jugador(11, 10, rojo, tablero);
+		Jugador j6 = new Jugador(10, 10, rojo, tablero);
 		
 		//Agrego jugadores del equipo Azul
-		tablero.agregarJugador(5, 7, j1);
-		tablero.agregarJugador(4, 9, j2);
-		tablero.agregarJugador(1, 3, j3);
+		tablero.putJugador(5, 7, j1);
+		tablero.putJugador(4, 9, j2);
+		tablero.putJugador(1, 3, j3);
 		
 		//Agrego jugadores del equipo Rojo
-		tablero.agregarJugador(7, 4, j4);
-		tablero.agregarJugador(10, 6, j5);
-		tablero.agregarJugador(11, 10, j6);
+		tablero.putJugador(7, 4, j4);
+		tablero.putJugador(10, 6, j5);
+		tablero.putJugador(9, 10, j6);
 		
 //		j1.start();
 //		j2.start();

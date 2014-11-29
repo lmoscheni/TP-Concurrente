@@ -23,34 +23,34 @@ public class Jugador extends Thread{
 		}
 	}
 	
-	public void moverAtras() throws InterruptedException {
-		if(this.equipo.emisferioDeOrigen() == "Sur"){
-			this.moverAdelanteDesdeSur();
-		}
-		if(this.equipo.emisferioDeOrigen() == "Norte"){
-			this.moverAdelanteDesdeNorte();
-		}
-	}
+//	public void moverAtras() throws InterruptedException {
+//		if(this.equipo.emisferioDeOrigen() == "Sur"){
+//			this.moverAdelanteDesdeSur();
+//		}
+//		if(this.equipo.emisferioDeOrigen() == "Norte"){
+//			this.moverAdelanteDesdeNorte();
+//		}
+//	}
 	
 	public void moverAdelanteDesdeNorte() throws InterruptedException{
 		this.tablero.moverAdelante(posicionX,posicionY+1,this);
 		this.buscarTesoroEnemigo(posicionX,posicionY+1);
 	}
 	
-	public void moverAtrasDesdeNorte() throws InterruptedException {
-		this.tablero.moverAdelante(posicionX,posicionY-1,this);
-		this.buscarTesoroEnemigo(posicionX,posicionY+1);
-	}
+//	public void moverAtrasDesdeNorte() throws InterruptedException {
+//		this.tablero.moverAdelante(posicionX,posicionY-1,this);
+//		this.buscarTesoroEnemigo(posicionX,posicionY+1);
+//	}
 	
 	public void moverAdelanteDesdeSur() throws InterruptedException{
 		this.tablero.moverAdelante(posicionX,posicionY-1,this);
 		this.buscarTesoroEnemigo(posicionX,posicionY-1);
 	}
 	
-	public void moverAtrasDesdeSur() throws InterruptedException {
-		this.tablero.moverAdelante(posicionX,posicionY+1,this);
-		this.buscarTesoroEnemigo(posicionX,posicionY-1);
-	}
+//	public void moverAtrasDesdeSur() throws InterruptedException {
+//		this.tablero.moverAdelante(posicionX,posicionY+1,this);
+//		this.buscarTesoroEnemigo(posicionX,posicionY-1);
+//	}
 	
 	public void moverDerecha() throws InterruptedException{
 		if(this.equipo.emisferioDeOrigen() == "Sur"){
@@ -79,7 +79,7 @@ public class Jugador extends Thread{
 	}
 	
 	public String miEquipo(){
-		return this.equipo.nombre;
+		return equipo.getNombre();
 	}
 	
 	private void buscarTesoroEnemigo(int x, int y){
@@ -121,13 +121,13 @@ public class Jugador extends Thread{
 					e.printStackTrace();
 				}
 			}
-			else {
-				try {
-					this.moverAtras();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+//			else {
+//				try {
+//					this.moverAtras();
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			}
 		}
 	}
 }
