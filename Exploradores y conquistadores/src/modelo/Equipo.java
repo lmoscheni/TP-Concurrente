@@ -22,5 +22,9 @@ public class Equipo {
 		this.tesorosPorCapturar--;
 	}
 	
+	public String getNombre(){
+		return this.nombre;
+	}
+	
 
 }

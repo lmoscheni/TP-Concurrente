@@ -1,23 +1,33 @@
 package modelo;
 
 public class Tablero {
-	Celda[][] tablero;
+	
+	public Celda[][] tablero;
 	int xMax;
 	int yMax;
 
 	public Tablero(int x, int y) {
-		int xAux = x;
-		int yAux = y;
-		
-		while(xAux < 0) {
-			while(yAux < 0) {
-				this.tablero[xAux][yAux] = new Celda();
+		this.xMax = x;
+		this.yMax = y;
+		this.tablero = new Celda[xMax][yMax];
+		this.cargarCeldas();
+	}
+	
+	private void cargarCeldas(){
+		for(int i = 0; i < xMax; i++){
+			for(int j = 0; j < yMax; j++){
+				this.tablero[i][j] = new Celda(); 
 			}
 		}
 	}
 	
-	public void agregarJugador(int x, int y, Jugador j) {
-		this.tablero[x][y].jugador = j;
+//	public void agregarJugador(int x, int y, Jugador j) {
+//		this.tablero[x][y].setJugador(j);
+//	}
+	
+	public void putJugador(int x, int y, Jugador jugador){
+		Celda celda = this.tablero[x][y];
+		celda.setJugador(jugador);
 	}
 	
 	public void mover(int x, int y, Jugador jugador) throws InterruptedException {
@@ -57,16 +67,18 @@ public class Tablero {
 	}
 	
 	private boolean tengoVecinosXmas1(int x, int y, Jugador jugador){
-		if(esPosicionValida(x-1, y)){
-			return tablero[x-1][y].jugador.miEquipo() == jugador.miEquipo();
+		if(esPosicionValida(x + 1, y)){
+			Celda c = tablero[x+1][y];
+			String s = c.getJugador().miEquipo();
+			return (s.equals(jugador.miEquipo()));
 		}else{
 			return false;
 		}
 	}
 	
 	private boolean tengoVecinosXmenos1(int x, int y, Jugador jugador){
-		if(esPosicionValida(x+1, y)){
-			return tablero[x+1][y].jugador.miEquipo() == jugador.miEquipo();
+		if(esPosicionValida(x - 1, y)){
+			return tablero[x-1][y].jugador.miEquipo() == jugador.miEquipo();
 		}else{
 			return false;
 		}

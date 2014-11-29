@@ -15,6 +15,11 @@ public class Celda {
 	Jugador jugador;
 	String equipoDueñoDelTesoro;
 	
+	public Celda(){
+		this.jugador = null;
+		this.equipoDueñoDelTesoro = null;
+	}
+	
 	public void ponerJugador(Jugador unJugador) throws InterruptedException{
 		lock.lock();
 		while(this.hayJugador()){
@@ -54,5 +59,13 @@ public class Celda {
 	
 	public boolean elTesoroEsDeMiEquipo(Jugador jugador){
 		return this.equipoDueñoDelTesoro == jugador.miEquipo();
+	}
+	
+	public void setJugador(Jugador jugador){
+		this.jugador = jugador;
+	}
+	
+	public Jugador getJugador(){
+		return this.jugador;
 	}
 }
