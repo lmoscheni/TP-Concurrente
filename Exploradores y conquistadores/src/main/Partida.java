@@ -1,5 +1,6 @@
 package main;
 
+import modelo.Celda;
 import modelo.Equipo;
 import modelo.Jugador;
 import modelo.Tablero;
@@ -9,6 +10,10 @@ public class Partida {
 	public static void main(String[] args) {
 		
 		Tablero tablero = new Tablero(11, 11);
+		
+		Celda c = tablero.obtenerCelda(8, 9);
+		
+		System.out.println(c.getEquipoDuenoDelTesoro());
 		
 		Equipo azul = new Equipo("Azul", "Norte", 3, 5);
 		Equipo rojo = new Equipo("Rojo", "Sur", 3, 5);
@@ -33,11 +38,11 @@ public class Partida {
 		tablero.agregarJugador(10, 6, j5);
 		tablero.agregarJugador(11, 10, j6);
 		
-		j1.start();
-		j2.start();
-		j3.start();
-		j4.start();
-		j5.start();
-		j6.start();
+//		j1.start();
+//		j2.start();
+//		j3.start();
+//		j4.start();
+//		j5.start();
+//		j6.start();
 	}
 }

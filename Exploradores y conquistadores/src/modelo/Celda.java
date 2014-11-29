@@ -15,6 +15,15 @@ public class Celda {
 	Jugador jugador;
 	String equipoDueñoDelTesoro;
 	
+	public Celda() {
+		this.jugador = null;
+		this.equipoDueñoDelTesoro = null;
+	}
+	
+	public String getEquipoDuenoDelTesoro() {
+		return equipoDueñoDelTesoro;
+	}
+	
 	public void ponerJugador(Jugador unJugador) throws InterruptedException{
 		lock.lock();
 		while(this.hayJugador()){

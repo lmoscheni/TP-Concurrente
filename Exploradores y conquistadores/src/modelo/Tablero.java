@@ -91,5 +91,10 @@ public class Tablero {
 		}
 	}
 	
+	public Celda obtenerCelda(int x, int y) {
+		Celda d = this.tablero[x][y];
+		
+		return d;
+	}
 	
 }
