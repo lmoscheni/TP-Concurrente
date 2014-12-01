@@ -7,23 +7,23 @@ public class Tablero {
 	int yMax;
 
 	public Tablero(int x, int y) {
-		this.xMax = x;
-		this.yMax = y;
-		this.tablero = new Celda[xMax][yMax];
+		this.xMax = x-1;
+		this.yMax = y-1;
+		this.tablero = new Celda[x][y];
 		this.cargarCeldas();
 	}
 	
 	private void cargarCeldas(){
-		for(int i = 0; i < xMax; i++){
-			for(int j = 0; j < yMax; j++){
+		for(int i = 0; i <= xMax; i++){
+			for(int j = 0; j <= yMax; j++){
 				this.tablero[i][j] = new Celda(); 
 			}
 		}
 	}
 	
-//	public void agregarJugador(int x, int y, Jugador j) {
-//		this.tablero[x][y].setJugador(j);
-//	}
+	public void putTesoro(int x, int y, String equipo){
+		this.tablero[x][y].setTesoro(equipo);
+	}
 	
 	public void putJugador(int x, int y, Jugador jugador){
 		Celda celda = this.tablero[x][y];
@@ -69,8 +69,12 @@ public class Tablero {
 	private boolean tengoVecinosXmas1(int x, int y, Jugador jugador){
 		if(esPosicionValida(x + 1, y)){
 			Celda c = tablero[x+1][y];
-			String s = c.getJugador().miEquipo();
-			return (s.equals(jugador.miEquipo()));
+			if(! (c.getJugador() == null)){
+				String s = c.getJugador().miEquipo();
+				return (s.equals(jugador.miEquipo()));
+			}else{
+				return false;
+			}
 		}else{
 			return false;
 		}
@@ -78,7 +82,13 @@ public class Tablero {
 	
 	private boolean tengoVecinosXmenos1(int x, int y, Jugador jugador){
 		if(esPosicionValida(x - 1, y)){
-			return tablero[x-1][y].jugador.miEquipo() == jugador.miEquipo();
+			Celda c = tablero[x-1][y];
+			if(! (c.getJugador() == null)){
+				String s = c.getJugador().miEquipo();
+				return (s.equals(jugador.miEquipo()));
+			}else{
+				return false;
+			}
 		}else{
 			return false;
 		}
@@ -92,7 +102,11 @@ public class Tablero {
 	}
 	
 	public boolean hayTesoro(int x, int y){
-		return this.tablero[x][y].hayTesoro();
+		if(this.esPosicionValida(x, y)){
+			return this.tablero[x][y].hayTesoro();
+		}else{
+			return false;
+		}
 	}
 	
 	public boolean hayTesoroEnemigo(int x, int y, Jugador jugador){
@@ -107,6 +121,20 @@ public class Tablero {
 		Celda d = this.tablero[x][y];
 		
 		return d;
+	}
+	
+	public void salirDeCelda(int x, int y){
+		if(this.esPosicionValida(x, y)){
+			this.tablero[x][y].quitarJugador();
+		}else{
+			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
+		}
+	}
+	
+	public boolean estoyEnAlgunExtremo(int x, int y){
+		boolean ret = this.esPosicionValida(x+1, y) && this.esPosicionValida(x-1, y)
+				      && this.esPosicionValida(x, y + 1) && this.esPosicionValida(x, y - 1);
+		return ret;
 	}
 	
 }

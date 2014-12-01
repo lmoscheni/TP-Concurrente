@@ -15,18 +15,19 @@ public class Celda {
 	Jugador jugador;
 	String equipoDueñoDelTesoro;
 	
+	//Constructor
 	public Celda(){
 		this.jugador = null;
 		this.equipoDueñoDelTesoro = null;
 	}
 	
 	public void ponerJugador(Jugador unJugador) throws InterruptedException{
-		lock.lock();
+		lock.lock();	
 		while(this.hayJugador()){
 			this.espera.await();
 		}
-		// Para despertar a los posibles threads que puedan avanzar al tener un vecino
-		this.esperaDeVecinos.signalAll();
+		this.jugador = unJugador;
+		this.esperaDeVecinos.signal();
 		lock.unlock();
 	}
 
@@ -34,7 +35,9 @@ public class Celda {
 		lock.lock();
 		while(this.hayJugador() || ! unJugador.tieneVecinos()){
 			this.esperaDeVecinos.await();
+//			this.espera.await();
 		}
+		this.jugador = unJugador;
 		lock.unlock();
 	}
 	
@@ -42,6 +45,7 @@ public class Celda {
 		lock.lock();
 		this.jugador = null;
 		this.espera.signal();
+		//this.esperaDeVecinos.
 		lock.unlock();
 	}
 	
@@ -67,5 +71,9 @@ public class Celda {
 	
 	public Jugador getJugador(){
 		return this.jugador;
+	}
+	
+	public void setTesoro(String equipo){
+		this.equipoDueñoDelTesoro = equipo;
 	}
 }

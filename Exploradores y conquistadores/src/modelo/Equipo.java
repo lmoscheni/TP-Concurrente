@@ -7,10 +7,10 @@ public class Equipo {
 	int cantidadDeTesoros;
 	int tesorosPorCapturar;
 
-	public Equipo(String e, String o, int cTesoros, int tesorosEnemigos) {
-		this.nombre = e;
-		this.origen = o;
-		this.cantidadDeTesoros = cTesoros;
+	public Equipo(String nombre, String origen, int cantidadDeTesoros, int tesorosEnemigos) {
+		this.nombre = nombre;
+		this.origen = origen;
+		this.cantidadDeTesoros = cantidadDeTesoros;
 		this.tesorosPorCapturar = tesorosEnemigos;
 	}
 	
@@ -24,6 +24,10 @@ public class Equipo {
 	
 	public String getNombre(){
 		return this.nombre;
+	}
+	
+	public boolean gano(){
+		return tesorosPorCapturar == 0;
 	}
 	
 
