@@ -13,8 +13,7 @@ public class Tablero {
 		this.tablero = new Celda[x][y];
 		this.cargarCeldas(x,y);
 	}
-	
-	
+		
 	// Accesors
 	
 	public void putTesoro(int x, int y, String equipo){
@@ -29,6 +28,7 @@ public class Tablero {
 	//Metodos de comunicacion con otros objetos
 	
 	public void mover(int x, int y, Jugador jugador) throws InterruptedException {
+//		System.out.println("X=" + x + " Y=" + y);
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugador(jugador);
 			jugador.buscarTesoroEnemigo(x, y);
@@ -37,6 +37,7 @@ public class Tablero {
 	}
 	
 	public void moverAdelante(int x, int y,Jugador jugador) throws InterruptedException {
+//		System.out.println("X=" + x + " Y=" + y);
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugadorCuandoTengaVecinos(jugador);
 			jugador.buscarTesoroEnemigo(x, y);
@@ -65,10 +66,8 @@ public class Tablero {
 	}
 	
 	public void salirDeCelda(int x, int y, Jugador jugador){
-		if(this.esPosicionValida(x, y)){
-			this.tablero[jugador.posicionX][jugador.posicionY].quitarJugador();
-			jugador.actualizarPosicion(x, y);
-		}
+		this.tablero[jugador.posicionX][jugador.posicionY].quitarJugador();
+		jugador.actualizarPosicion(x, y);
 	}
 	
 	public void quitarTesoro(int x, int y){
@@ -86,52 +85,31 @@ public class Tablero {
 	}
 	
 	private boolean tengoVecinoAtras(int x, int y, Jugador jugador){
-		if(!(esPosicionValida(x, y+1) || esPosicionValida(x, y-1))){
-			return false;
+		if(jugador.equipo.getOrigen() == "Norte"){
+			if(esPosicionValida(x, y-1) && tablero[x][y-1].hayJugador()){
+				return tablero[x][y-1].jugador.miEquipo() == jugador.miEquipo();
+			}
 		}
-		if(jugador.miEquipo() == "Norte"){
-			return tablero[x][y-1].jugador.miEquipo() == jugador.miEquipo();
+		if(jugador.equipo.getOrigen() == "Sur"){
+			if(esPosicionValida(x, y+1) && tablero[x][y+1].hayJugador()){
+				return tablero[x][y+1].jugador.miEquipo() == jugador.miEquipo();
+			}
 		}
-		if(jugador.miEquipo() == "Sur"){
-			return tablero[x][y+1].jugador.miEquipo() == jugador.miEquipo();
-		}else{
-			return false;
-		}
+		return false;
 	}
 	
 	private boolean tengoVecinoALosLados(int x, int y, Jugador jugador){
-		return tengoVecinosXmas1(x, y, jugador) || tengoVecinosXmenos1(x, y, jugador);
+		return tengoVecinoEn(x+1,y,jugador) || tengoVecinoEn(x-1, y,jugador);
 	}
 	
-	private boolean tengoVecinosXmas1(int x, int y, Jugador jugador){
-		if(esPosicionValida(x + 1, y)){
-			Celda c = tablero[x+1][y];
-			if(! (c.getJugador() == null)){
-				String s = c.getJugador().miEquipo();
-				return (s.equals(jugador.miEquipo()));
-			}else{
-				return false;
-			}
-		}else{
-			return false;
+	private boolean tengoVecinoEn(int x, int y, Jugador jugador){
+		if(esPosicionValida(x, y) && tablero[x][y].hayJugador()){
+			return jugador.miEquipo() == tablero[x][y].jugador.miEquipo();
 		}
+		return false;
 	}
-	
-	private boolean tengoVecinosXmenos1(int x, int y, Jugador jugador){
-		if(esPosicionValida(x - 1, y)){
-			Celda c = tablero[x-1][y];
-			if(c.hayJugador()){
-				String s = c.getJugador().miEquipo();
-				return (s.equals(jugador.miEquipo()));
-			}else{
-				return false;
-			}
-		}else{
-			return false;
-		}
-	}
-	
+
 	private boolean esPosicionValida(int x, int y){
-		return ((x <= xMax || x >= 0) && (y <= yMax || y >= 0));
+		return (x <= xMax && x >= 0 && y <= yMax && y >= 0);
 	}	
 }

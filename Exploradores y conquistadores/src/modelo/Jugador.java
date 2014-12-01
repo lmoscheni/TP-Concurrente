@@ -17,40 +17,37 @@ public class Jugador{
 	//Metodos de Dominio
 	
 	public void moverAdelante() throws InterruptedException{
-		System.out.println("El jugador se quiere mover adelante");
-		
-		if(this.equipo.emisferioDeOrigen() == "Sur"){
-			this.moverAdelanteDesdeSur();
-		}
 		
 		if(this.equipo.emisferioDeOrigen() == "Norte"){
 			this.moverAdelanteDesdeNorte();
 		}
+		
+		if(this.equipo.emisferioDeOrigen() == "Sur"){
+			this.moverAdelanteDesdeSur();
+		}
 	}
 	
 	public void moverDerecha() throws InterruptedException{
-		System.out.println("El jugador se quiere mover a la derecha");
-		
-		if(this.equipo.emisferioDeOrigen() == "Sur"){
-			this.tablero.mover(posicionX +1, posicionY,this);
-//			this.buscarTesoroEnemigo(posicionX+1,posicionY);
-		}
 		
 		if(this.equipo.emisferioDeOrigen() == "Norte"){
-			this.tablero.mover(posicionX -1, posicionY,this);
+			this.tablero.mover(posicionX-1, posicionY,this);
 //			this.buscarTesoroEnemigo(posicionX-1 ,posicionY);
+		}
+		
+		if(this.equipo.emisferioDeOrigen() == "Sur"){
+			this.tablero.mover(posicionX+1, posicionY,this);
+//			this.buscarTesoroEnemigo(posicionX+1,posicionY);
 		}
 	}
 	
 	public void moverIzquierda() throws InterruptedException{
-		System.out.println("El  jugador se quiere mover a la izquierda");
 		
 		if(this.equipo.emisferioDeOrigen() == "Sur"){
-			this.tablero.mover(posicionX -1, posicionY,this);
+			this.tablero.mover(posicionX-1, posicionY,this);
 //			this.buscarTesoroEnemigo(posicionX-1,posicionY);
 		}
 		if(this.equipo.emisferioDeOrigen() == "Norte"){
-			this.tablero.mover(posicionX +1, posicionY,this);
+			this.tablero.mover(posicionX+1, posicionY,this);
 //			this.buscarTesoroEnemigo(posicionX+1,posicionY);
 		}
 	}

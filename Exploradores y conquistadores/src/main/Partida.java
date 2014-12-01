@@ -13,8 +13,8 @@ public class Partida {
 		Tablero tablero = new Tablero(5, 5);
 		
 		
-		Equipo azul = new Equipo("Azul", "Norte", 3, 3);
-		Equipo rojo = new Equipo("Rojo", "Sur", 3, 3);
+		Equipo azul = new Equipo("Azul", "Norte", 3, 1);
+		Equipo rojo = new Equipo("Rojo", "Sur", 3, 1);
 		
 		//Jugadores Equipo Azul
 		Jugador j1 = new Jugador(0, 0, azul, tablero);
@@ -37,25 +37,29 @@ public class Partida {
 		tablero.putJugador(4, 3, j6);
 		
 		//Agrego los tesoros del equipo Azul
-		tablero.putTesoro(0,4,"Azul");
 		tablero.putTesoro(1,3,"Azul");
-		tablero.putTesoro(4,3,"Azul");
+		tablero.putTesoro(1,4,"Azul");
+		tablero.putTesoro(2,3,"Azul");
+		tablero.putTesoro(3,3,"Azul");
+		tablero.putTesoro(3,4,"Azul");
 		
 		//Agrego los tesoros del equipo Rojo	
+		tablero.putTesoro(1,0,"Rojo");
 		tablero.putTesoro(1,1,"Rojo");
 		tablero.putTesoro(2,0,"Rojo");
+		tablero.putTesoro(3,0,"Rojo");
 		tablero.putTesoro(3,1,"Rojo");
 		
 		//Creo los exploradores del equipo Azul
-		Explorador e1a = new Explorador(j1, 500,"Leandro",azul, rojo);
-		Explorador e2a = new Explorador(j1, 600,"Mati",azul, rojo);
-		Explorador e3a = new Explorador(j1, 700,"Diego",azul, rojo);
+		Explorador e1a = new Explorador(j1, 1500,"Leandro",azul, rojo);
+		Explorador e2a = new Explorador(j1, 1600,"Mati",azul, rojo);
+		Explorador e3a = new Explorador(j1, 1700,"Diego",azul, rojo);
 		
 		//Creo los exploradores del equipo Rojo
 		//Creo los exploradores del equipo Azul
-		Explorador e1r = new Explorador(j1, 700,"Jorge",azul, rojo);
-		Explorador e2r = new Explorador(j1, 800,"Esteban",azul, rojo);
-		Explorador e3r = new Explorador(j1, 400,"Nicolas",azul, rojo);
+		Explorador e1r = new Explorador(j1, 1700,"Jorge",azul, rojo);
+		Explorador e2r = new Explorador(j1, 1800,"Esteban",azul, rojo);
+		Explorador e3r = new Explorador(j1, 1400,"Nicolas",azul, rojo);
 		
 		//Inicio la partida
 		System.out.println("Inicia la partida");

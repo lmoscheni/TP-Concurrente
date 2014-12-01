@@ -14,6 +14,10 @@ public class Equipo {
 		this.tesorosPorCapturar = tesorosEnemigos;
 	}
 	
+	public String getOrigen(){
+		return origen;
+	}
+	
 	public String emisferioDeOrigen() {
 		return origen;
 	}

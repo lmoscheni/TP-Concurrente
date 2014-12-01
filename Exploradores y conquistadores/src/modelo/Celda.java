@@ -33,9 +33,9 @@ public class Celda {
 
 	public void ponerJugadorCuandoTengaVecinos(Jugador unJugador) throws InterruptedException{
 		lock.lock();
-		while(this.hayJugador() || ! unJugador.tieneVecinos()){
-			this.esperaDeVecinos.await();
-//			this.espera.await();
+		while(this.hayJugador() || !unJugador.tieneVecinos()){
+//			this.esperaDeVecinos.await();
+			this.espera.await();
 		}
 		this.jugador = unJugador;
 		lock.unlock();
@@ -45,7 +45,7 @@ public class Celda {
 		lock.lock();
 		this.jugador = null;
 		this.espera.signalAll();
-		this.esperaDeVecinos.signalAll();
+//		this.esperaDeVecinos.signalAll();
 		lock.unlock();
 	}
 	
