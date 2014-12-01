@@ -27,7 +27,7 @@ public class Celda {
 			this.espera.await();
 		}
 		this.jugador = unJugador;
-		this.esperaDeVecinos.signal();
+//		this.esperaDeVecinos.signal();
 		lock.unlock();
 	}
 
@@ -45,7 +45,7 @@ public class Celda {
 		lock.lock();
 		this.jugador = null;
 		this.espera.signal();
-		//this.esperaDeVecinos.
+		this.esperaDeVecinos.signal();
 		lock.unlock();
 	}
 	

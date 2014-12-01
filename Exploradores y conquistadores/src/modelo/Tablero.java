@@ -10,12 +10,12 @@ public class Tablero {
 		this.xMax = x-1;
 		this.yMax = y-1;
 		this.tablero = new Celda[x][y];
-		this.cargarCeldas();
+		this.cargarCeldas(x,y);
 	}
 	
-	private void cargarCeldas(){
-		for(int i = 0; i <= xMax; i++){
-			for(int j = 0; j <= yMax; j++){
+	private void cargarCeldas(int x, int y){
+		for(int i = 0; i < x; i++){
+			for(int j = 0; j < y; j++){
 				this.tablero[i][j] = new Celda(); 
 			}
 		}
@@ -52,10 +52,13 @@ public class Tablero {
 	}
 	
 	private boolean tengoVecinoAtras(int x, int y, Jugador jugador){
-		if(jugador.miEquipo() == "Norte" && esPosicionValida(x, y-1)){
+		if(!(esPosicionValida(x, y+1) || esPosicionValida(x, y-1))){
+			return false;
+		}
+		if(jugador.miEquipo() == "Norte"){
 			return tablero[x][y-1].jugador.miEquipo() == jugador.miEquipo();
 		}
-		if(jugador.miEquipo() == "Sur" && esPosicionValida(x, y-1)){
+		if(jugador.miEquipo() == "Sur"){
 			return tablero[x][y+1].jugador.miEquipo() == jugador.miEquipo();
 		}else{
 			return false;

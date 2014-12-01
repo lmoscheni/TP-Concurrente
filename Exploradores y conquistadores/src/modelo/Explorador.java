@@ -46,7 +46,6 @@ public class Explorador extends Thread{
 				e.printStackTrace();
 			}
 		}
-		
 		if(this.equipoNorte.gano()){
 			System.out.println("Gano el equipo Norte");
 		}else{
