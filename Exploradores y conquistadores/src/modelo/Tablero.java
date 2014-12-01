@@ -6,6 +6,7 @@ public class Tablero {
 	int xMax;
 	int yMax;
 
+	// Constructor
 	public Tablero(int x, int y) {
 		this.xMax = x-1;
 		this.yMax = y-1;
@@ -13,13 +14,8 @@ public class Tablero {
 		this.cargarCeldas(x,y);
 	}
 	
-	private void cargarCeldas(int x, int y){
-		for(int i = 0; i < x; i++){
-			for(int j = 0; j < y; j++){
-				this.tablero[i][j] = new Celda(); 
-			}
-		}
-	}
+	
+	// Accesors
 	
 	public void putTesoro(int x, int y, String equipo){
 		this.tablero[x][y].setTesoro(equipo);
@@ -30,25 +26,66 @@ public class Tablero {
 		celda.setJugador(jugador);
 	}
 	
+	//Metodos de comunicacion con otros objetos
+	
 	public void mover(int x, int y, Jugador jugador) throws InterruptedException {
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugador(jugador);
+			jugador.actualizarPosicion(x, y);
 		}else{
-			System.out.println("Posicion Invalida, estas en el borde");
+			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
 		}
 	}
-
+	
 	public void moverAdelante(int x, int y,Jugador jugador) throws InterruptedException {
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugadorCuandoTengaVecinos(jugador);
+			jugador.actualizarPosicion(x, y);
 		}else{
-			System.out.println("Posicion Invalida, estas en el borde");
-		}
-		
+			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
+		}	
 	}
 
 	public boolean tengoVecinos(int x, int y,Jugador jugador) {
 		return tengoVecinoALosLados(x, y, jugador) || tengoVecinoAtras(x, y, jugador);
+	}
+	
+	public boolean hayTesoro(int x, int y){
+		if(this.esPosicionValida(x, y)){
+			return this.tablero[x][y].hayTesoro();
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean hayTesoroEnemigo(int x, int y, Jugador jugador){
+		if(hayTesoro(x,y)){
+			return this.tablero[x][y].elTesoroEsDeMiEquipo(jugador);
+		}else{
+			return false;
+		}
+	}
+	
+	public void salirDeCelda(int x, int y){
+		if(this.esPosicionValida(x, y)){
+			this.tablero[x][y].quitarJugador();
+		}else{
+			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
+		}
+	}
+	
+	public void quitarTesoro(int x, int y){
+		this.tablero[x][y].quitarTesoro();
+	}
+	
+	//Metodos de soporte interno
+	
+	private void cargarCeldas(int x, int y){
+		for(int i = 0; i < x; i++){
+			for(int j = 0; j < y; j++){
+				this.tablero[i][j] = new Celda(); 
+			}
+		}
 	}
 	
 	private boolean tengoVecinoAtras(int x, int y, Jugador jugador){
@@ -98,46 +135,18 @@ public class Tablero {
 	}
 	
 	private boolean esPosicionValida(int x, int y){
-		if((x > xMax || x < 0) || (y > yMax || y < 0)){
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean hayTesoro(int x, int y){
-		if(this.esPosicionValida(x, y)){
-			return this.tablero[x][y].hayTesoro();
-		}else{
-			return false;
-		}
-	}
-	
-	public boolean hayTesoroEnemigo(int x, int y, Jugador jugador){
-		if(hayTesoro(x,y)){
-			return this.tablero[x][y].elTesoroEsDeMiEquipo(jugador);
-		}else{
-			return false;
-		}
-	}
-	
-	public Celda obtenerCelda(int x, int y) {
-		Celda d = this.tablero[x][y];
-		
-		return d;
-	}
-	
-	public void salirDeCelda(int x, int y){
-		if(this.esPosicionValida(x, y)){
-			this.tablero[x][y].quitarJugador();
-		}else{
-			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
-		}
-	}
-	
-	public boolean estoyEnAlgunExtremo(int x, int y){
-		boolean ret = this.esPosicionValida(x+1, y) && this.esPosicionValida(x-1, y)
-				      && this.esPosicionValida(x, y + 1) && this.esPosicionValida(x, y - 1);
-		return ret;
-	}
-	
+		return ((x <= xMax || x >= 0) && (y <= yMax || y >= 0));
+	}	
 }
+
+//public Celda obtenerCelda(int x, int y) {
+//Celda d = this.tablero[x][y];
+//
+//return d;
+//}	
+//
+//public boolean estoyEnAlgunExtremo(int x, int y){
+//	boolean ret = this.esPosicionValida(x+1, y) && this.esPosicionValida(x-1, y)
+//			      && this.esPosicionValida(x, y + 1) && this.esPosicionValida(x, y - 1);
+//	return ret;
+//}
