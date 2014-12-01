@@ -33,14 +33,12 @@ public class Jugador{
 		
 		if(this.equipo.emisferioDeOrigen() == "Sur"){
 			this.tablero.mover(posicionX +1, posicionY,this);
-			this.buscarTesoroEnemigo(posicionX+1,posicionY);
-			this.dejarCelda();
+//			this.buscarTesoroEnemigo(posicionX+1,posicionY);
 		}
 		
 		if(this.equipo.emisferioDeOrigen() == "Norte"){
 			this.tablero.mover(posicionX -1, posicionY,this);
-			this.buscarTesoroEnemigo(posicionX-1 ,posicionY);
-			this.dejarCelda();
+//			this.buscarTesoroEnemigo(posicionX-1 ,posicionY);
 		}
 	}
 	
@@ -49,13 +47,11 @@ public class Jugador{
 		
 		if(this.equipo.emisferioDeOrigen() == "Sur"){
 			this.tablero.mover(posicionX -1, posicionY,this);
-			this.buscarTesoroEnemigo(posicionX-1,posicionY);
-			this.dejarCelda();
+//			this.buscarTesoroEnemigo(posicionX-1,posicionY);
 		}
 		if(this.equipo.emisferioDeOrigen() == "Norte"){
 			this.tablero.mover(posicionX +1, posicionY,this);
-			this.buscarTesoroEnemigo(posicionX-1,posicionY);
-			this.dejarCelda();
+//			this.buscarTesoroEnemigo(posicionX+1,posicionY);
 		}
 	}
 	
@@ -79,26 +75,24 @@ public class Jugador{
 	
 	private void moverAdelanteDesdeNorte() throws InterruptedException{
 		this.tablero.moverAdelante(posicionX,posicionY+1,this);
-		this.buscarTesoroEnemigo(posicionX,posicionY+1);
-		this.dejarCelda();
+//		this.buscarTesoroEnemigo(posicionX,posicionY+1);
 	}
 	
 	private void moverAdelanteDesdeSur() throws InterruptedException{
 		this.tablero.moverAdelante(posicionX,posicionY-1,this);
-		this.buscarTesoroEnemigo(posicionX,posicionY-1);
-		this.dejarCelda();
+//		this.buscarTesoroEnemigo(posicionX,posicionY-1);
 	}
 
-	private void buscarTesoroEnemigo(int x, int y){
+	public void buscarTesoroEnemigo(int x, int y){
 		if(this.tablero.hayTesoroEnemigo(x, y, this)){
 			this.tablero.quitarTesoro(x, y);
 			this.equipo.captureTesoro();
 		}		
 	}
 	
-	private void dejarCelda(){
-		this.tablero.salirDeCelda(this.posicionX,this.posicionY);
-	}
+//	public void dejarCelda(int xNueva, int yNueva){
+//		this.tablero.salirDeCelda(xNueva,yNueva,this);
+//	}
 	
 
 }

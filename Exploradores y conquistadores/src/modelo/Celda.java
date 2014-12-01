@@ -53,10 +53,6 @@ public class Celda {
 		this.equipoDueñoDelTesoro = null;
 	}
 	
-	private boolean hayJugador() {
-		return this.jugador != null;
-	}
-	
 	public boolean hayTesoro(){
 		return this.equipoDueñoDelTesoro != null;
 	}
@@ -75,5 +71,9 @@ public class Celda {
 	
 	public void setTesoro(String equipo){
 		this.equipoDueñoDelTesoro = equipo;
+	}
+	
+	public boolean hayJugador(){
+		return this.jugador != null;
 	}
 }

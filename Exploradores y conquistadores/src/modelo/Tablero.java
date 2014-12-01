@@ -31,19 +31,17 @@ public class Tablero {
 	public void mover(int x, int y, Jugador jugador) throws InterruptedException {
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugador(jugador);
-			jugador.actualizarPosicion(x, y);
-		}else{
-			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
+			jugador.buscarTesoroEnemigo(x, y);
+			this.salirDeCelda(x, y, jugador);
 		}
 	}
 	
 	public void moverAdelante(int x, int y,Jugador jugador) throws InterruptedException {
 		if(esPosicionValida(x, y)){
 			tablero[x][y].ponerJugadorCuandoTengaVecinos(jugador);
-			jugador.actualizarPosicion(x, y);
-		}else{
-			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
-		}	
+			jugador.buscarTesoroEnemigo(x, y);
+			this.salirDeCelda(x, y, jugador);
+		}
 	}
 
 	public boolean tengoVecinos(int x, int y,Jugador jugador) {
@@ -66,11 +64,10 @@ public class Tablero {
 		}
 	}
 	
-	public void salirDeCelda(int x, int y){
+	public void salirDeCelda(int x, int y, Jugador jugador){
 		if(this.esPosicionValida(x, y)){
-			this.tablero[x][y].quitarJugador();
-		}else{
-			System.out.println("La posicion: (" + x + "," + y + ")" + "es invalida");
+			this.tablero[jugador.posicionX][jugador.posicionY].quitarJugador();
+			jugador.actualizarPosicion(x, y);
 		}
 	}
 	
@@ -123,7 +120,7 @@ public class Tablero {
 	private boolean tengoVecinosXmenos1(int x, int y, Jugador jugador){
 		if(esPosicionValida(x - 1, y)){
 			Celda c = tablero[x-1][y];
-			if(! (c.getJugador() == null)){
+			if(c.hayJugador()){
 				String s = c.getJugador().miEquipo();
 				return (s.equals(jugador.miEquipo()));
 			}else{
@@ -138,15 +135,3 @@ public class Tablero {
 		return ((x <= xMax || x >= 0) && (y <= yMax || y >= 0));
 	}	
 }
-
-//public Celda obtenerCelda(int x, int y) {
-//Celda d = this.tablero[x][y];
-//
-//return d;
-//}	
-//
-//public boolean estoyEnAlgunExtremo(int x, int y){
-//	boolean ret = this.esPosicionValida(x+1, y) && this.esPosicionValida(x-1, y)
-//			      && this.esPosicionValida(x, y + 1) && this.esPosicionValida(x, y - 1);
-//	return ret;
-//}
